@@ -1,0 +1,27 @@
+name: Build KernelSU-Next Stable
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-kernel:
+    name: Build Kernel
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Build
+        uses: dabao1955/kernel_build_action@main
+        with:
+          kernel-url: https://github.com/Bakoubak/android_kernel_lenovo_amar_row_lte/
+          kernel-branch: ksu-next+susfs/plts/4.9.370
+          config: perf_amar_row_lte_defconfig
+          arch: arm64
+          android-version: 10
+          ksu-other: true
+          ksu-url: github.com/KernelSU-Next/KernelSU-Next/
+          other-gcc64-url: https://github.com/jmpfbmx/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9.git
+          other-gcc64-branch: alps-9.0
+          other-clang-url: https://github.com/jmpfbmx/android_prebuilts_clang_kernel_linux-x86_clang-4691093
+          other-clang-branch: alps-9.0
+          anykernel3: true
+          release: true
+          ccache: true
